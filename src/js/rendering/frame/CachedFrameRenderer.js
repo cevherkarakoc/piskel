@@ -33,7 +33,7 @@
     var size = this.getDisplaySize();
     var serializedFrame = [
       this.getZoom(),
-      this.getGridWidth(),
+      this.getGridWeight(),
       pskl.UserSettings.get('SEAMLESS_MODE'),
       pskl.UserSettings.get('SEAMLESS_OPACITY'),
       offset.x, offset.y,

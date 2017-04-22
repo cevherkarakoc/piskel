@@ -55,7 +55,7 @@
     this.displayCanvas = null;
     this.setDisplaySize(renderingOptions.width, renderingOptions.height);
 
-    this.setGridWidth(pskl.UserSettings.get(pskl.UserSettings.GRID_WIDTH));
+    this.setGridWeight(pskl.UserSettings.get(pskl.UserSettings.GRID_WEIGHT));
 
     $.subscribe(Events.USER_SETTINGS_CHANGED, this.onUserSettingsChange_.bind(this));
   };
@@ -138,16 +138,16 @@
     this.offset.y = y;
   };
 
-  ns.FrameRenderer.prototype.setGridWidth = function (value) {
-    this.gridWidth_ = value;
+  ns.FrameRenderer.prototype.setGridWeight = function (value) {
+    this.gridWeight_ = value;
   };
 
-  ns.FrameRenderer.prototype.getGridWidth = function () {
+  ns.FrameRenderer.prototype.getGridWeight = function () {
     if (!this.supportGridRendering) {
       return 0;
     }
 
-    return this.gridWidth_;
+    return this.gridWeight_;
   };
 
   /**
@@ -155,11 +155,11 @@
    * particularly for the current zoom level
    */
   ns.FrameRenderer.prototype.computeGridWidthForDisplay_ = function () {
-    var gridWidth = this.getGridWidth();
-    while (this.zoom < 6 * gridWidth) {
-      gridWidth--;
+    var gridWeight = this.getGridWeight();
+    while (this.zoom < 6 * gridWeight) {
+      gridWeight--;
     }
-    return gridWidth;
+    return gridWeight;
   };
 
   ns.FrameRenderer.prototype.updateMargins_ = function (frame) {
@@ -180,8 +180,8 @@
   };
 
   ns.FrameRenderer.prototype.onUserSettingsChange_ = function (evt, settingName, settingValue) {
-    if (settingName == pskl.UserSettings.GRID_WIDTH) {
-      this.setGridWidth(settingValue);
+    if (settingName == pskl.UserSettings.GRID_WEIGHT) {
+      this.setGridWeight(settingValue);
     }
   };
 
@@ -276,17 +276,20 @@
     displayContext.drawImage(this.canvas, 0, 0);
 
     // Draw grid.
-    var gridWidth = this.computeGridWidthForDisplay_();
-    if (gridWidth > 0) {
+    var gridWeight = this.computeGridWidthForDisplay_();
+    if (gridWeight > 0) {
       // Scale out before drawing the grid.
       displayContext.scale(1 / z, 1 / z);
       // Clear vertical lines.
-      for (var i = 1 ; i < frame.getWidth() ; i++) {
-        displayContext.clearRect((i * z) - (gridWidth / 2), 0, gridWidth, h * z);
+      var spaceWidth = pskl.UserSettings.get('GRID_WIDTH');
+      var spaceHeight = pskl.UserSettings.get('GRID_HEIGHT');
+      displayContext.fillStyle = 'black';
+      for (var i = spaceWidth ; i < frame.getWidth() ; i += spaceWidth) {
+        displayContext.fillRect((i * z) - (gridWeight / 2), 0, gridWeight, h * z);
       }
       // Clear horizontal lines.
-      for (var j = 1 ; j < frame.getHeight() ; j++) {
-        displayContext.clearRect(0, (j * z) - (gridWidth / 2), w * z, gridWidth);
+      for (var j = spaceHeight ; j < frame.getHeight() ; j += spaceHeight) {
+        displayContext.fillRect(0, (j * z) - (gridWeight / 2), w * z, gridWeight);
       }
     }
 

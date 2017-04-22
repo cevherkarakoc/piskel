@@ -8,8 +8,8 @@
 
   ns.AbstractRenderer.prototype.getCoordinates = Constants.ABSTRACT_FUNCTION;
 
-  ns.AbstractRenderer.prototype.setGridWidth = Constants.ABSTRACT_FUNCTION;
-  ns.AbstractRenderer.prototype.getGridWidth =  Constants.ABSTRACT_FUNCTION;
+  ns.AbstractRenderer.prototype.setGridWeight = Constants.ABSTRACT_FUNCTION;
+  ns.AbstractRenderer.prototype.getGridWeight =  Constants.ABSTRACT_FUNCTION;
 
   ns.AbstractRenderer.prototype.setZoom = Constants.ABSTRACT_FUNCTION;
   ns.AbstractRenderer.prototype.getZoom = Constants.ABSTRACT_FUNCTION;

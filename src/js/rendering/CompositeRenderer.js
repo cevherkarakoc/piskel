@@ -48,14 +48,14 @@
     return this.getSampleRenderer_().getOffset();
   };
 
-  ns.CompositeRenderer.prototype.setGridWidth = function (b) {
+  ns.CompositeRenderer.prototype.setGridWeight = function (b) {
     this.renderers.forEach(function (renderer) {
-      renderer.setGridWidth(b);
+      renderer.setGridWeight(b);
     });
   };
 
-  ns.CompositeRenderer.prototype.getGridWidth = function () {
-    return this.getSampleRenderer_().getGridWidth();
+  ns.CompositeRenderer.prototype.getGridWeight = function () {
+    return this.getSampleRenderer_().getGridWeight();
   };
 
   ns.CompositeRenderer.prototype.getSampleRenderer_ = function () {

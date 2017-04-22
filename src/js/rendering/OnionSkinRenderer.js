@@ -59,7 +59,7 @@
     var layers = this.piskelController.getLayers();
     return [
       this.getZoom(),
-      this.getGridWidth(),
+      this.getGridWeight(),
       offset.x,
       offset.y,
       size.width,

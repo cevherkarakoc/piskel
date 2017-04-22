@@ -17,14 +17,24 @@
     }
 
     // Grid display and size
-    var gridWidth = pskl.UserSettings.get(pskl.UserSettings.GRID_WIDTH);
-    var gridSelect = document.querySelector('.grid-width-select');
-    var selectedOption = gridSelect.querySelector('option[value="' + gridWidth + '"]');
+    var gridWeight = pskl.UserSettings.get(pskl.UserSettings.GRID_WEIGHT);
+    var gridSelect = document.querySelector('.grid-weight-select');
+    var selectedOption = gridSelect.querySelector('option[value="' + gridWeight + '"]');
     if (selectedOption) {
       selectedOption.setAttribute('selected', 'selected');
     }
 
-    this.addEventListener(gridSelect, 'change', this.onGridWidthChange_);
+    this.addEventListener(gridSelect, 'change', this.onGridWeightChange_);
+
+    // Real Grid Width
+    var gridWidthInput = document.querySelector('.grid-width-input');
+    gridWidthInput.value = pskl.UserSettings.get(pskl.UserSettings.GRID_WIDTH);
+    this.addEventListener(gridWidthInput, 'change', this.onGridWidthChange_);
+
+    // Real Grid Height
+    var gridHeightInput = document.querySelector('.grid-height-input');
+    gridHeightInput.value = pskl.UserSettings.get(pskl.UserSettings.GRID_HEIGHT);
+    this.addEventListener(gridHeightInput, 'change', this.onGridHeightChange_);
 
     // Seamless mode
     var seamlessMode = pskl.UserSettings.get(pskl.UserSettings.SEAMLESS_MODE);
@@ -68,9 +78,9 @@
     this.addEventListener(this.applicationSettingsForm, 'submit', this.onFormSubmit_);
   };
 
-  ns.ApplicationSettingsController.prototype.onGridWidthChange_ = function (evt) {
-    var width = parseInt(evt.target.value, 10);
-    pskl.UserSettings.set(pskl.UserSettings.GRID_WIDTH, width);
+  ns.ApplicationSettingsController.prototype.onGridWeightChange_ = function (evt) {
+    var weight = parseInt(evt.target.value, 10);
+    pskl.UserSettings.set(pskl.UserSettings.GRID_WEIGHT, weight);
   };
 
   ns.ApplicationSettingsController.prototype.onColorFormatChange_ = function (evt) {
@@ -91,6 +101,26 @@
         selected.classList.remove('selected');
       }
       target.classList.add('selected');
+    }
+  };
+
+  ns.ApplicationSettingsController.prototype.onGridWidthChange_ = function (evt) {
+    var target = evt.target;
+    var width = parseInt(target.value, 10);
+    if (width && !isNaN(width)) {
+      pskl.UserSettings.set(pskl.UserSettings.GRID_WIDTH, width);
+    } else {
+      target.value = pskl.UserSettings.get(pskl.UserSettings.GRID_WIDTH);
+    }
+  };
+
+  ns.ApplicationSettingsController.prototype.onGridHeightChange_ = function (evt) {
+    var target = evt.target;
+    var height = parseInt(target.value, 10);
+    if (height && !isNaN(height)) {
+      pskl.UserSettings.set(pskl.UserSettings.GRID_HEIGHT, height);
+    } else {
+      target.value = pskl.UserSettings.get(pskl.UserSettings.GRID_HEIGHT);
     }
   };
 

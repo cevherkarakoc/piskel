@@ -106,7 +106,7 @@ describe("Onion Skin Renderer test", function() {
       getZoom : function () {
         return 1;
       },
-      getGridWidth : function () {
+      getGridWeight : function () {
         return 0;
       },
       getOffset : function () {

@@ -2,7 +2,9 @@
   var ns = $.namespace('pskl');
 
   ns.UserSettings = {
-    GRID_WIDTH : 'GRID_WIDTH',
+    GRID_WEIGHT : 'GRID_WEIGHT',
+    GRID_WIDTH: 'GRID_WIDTH',
+    GRID_HEIGHT: 'GRID_HEIGHT',
     MAX_FPS : 'MAX_FPS',
     DEFAULT_SIZE : 'DEFAULT_SIZE',
     CANVAS_BACKGROUND : 'CANVAS_BACKGROUND',
@@ -19,7 +21,9 @@
     RESIZE_SETTINGS: 'RESIZE_SETTINGS',
     COLOR_FORMAT: 'COLOR_FORMAT',
     KEY_TO_DEFAULT_VALUE_MAP_ : {
-      'GRID_WIDTH' : 0,
+      'GRID_WEIGHT' : 0,
+      'GRID_WIDTH': 1,
+      'GRID_HEIGHT': 1,
       'MAX_FPS' : 24,
       'DEFAULT_SIZE' : {
         width : Constants.DEFAULT.WIDTH,

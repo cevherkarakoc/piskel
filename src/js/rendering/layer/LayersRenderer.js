@@ -40,7 +40,7 @@
 
     var serializedRendering = [
       this.getZoom(),
-      this.getGridWidth(),
+      this.getGridWeight(),
       offset.x,
       offset.y,
       size.width,
